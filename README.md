@@ -1,2 +1,6 @@
 This is Painting Board Page!
-app.js, index.html update
+
+Make a Web Painting Board.
+
+Just Use HTML, CSS, JAVASCRIPT.
+
