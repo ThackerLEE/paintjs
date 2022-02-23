@@ -4,12 +4,14 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
 const clear = document.getElementById("jsClear");
+const saveBtn = document.getElementById("jsSave");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_SIZE = 700;
 // canvas.width = document.getElementsByClassName("canvas")[0].offsetWidth;
 // canvas.height = document.getElementsByClassName("canvas")[0].offsetHeight;
-
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 ctx.lineWidth = 2.5; 
 ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
@@ -62,12 +64,26 @@ function handleRangeChange(e){
     const size = e.target.value;
     ctx.lineWidth = size;
 }
+function handleCM(e){
+    e.preventDefault();
+}
+
+function handleSaveClick(){
+    const image = canvas.toDataURL();
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "PaintJS";
+    link.click();
+    
+}
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
     canvas.addEventListener("mousedown", startPainting);
     document.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseenter", onMouseEnter);
     canvas.addEventListener("click", handleCanvasClick);
+    canvas.addEventListener("contextmenu", handleCM);
+
 }
 
 function handleCanvasClick(){
@@ -105,4 +121,8 @@ if(range){
 
 if(mode){
     mode.addEventListener("click", handleModeClick)
+}
+
+if(saveBtn){
+    saveBtn.addEventListener("click", handleSaveClick)
 }
